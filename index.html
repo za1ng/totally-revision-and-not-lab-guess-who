@@ -2,36 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Totally Revision</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>LAB Guess Who</h1>
-            <div class="controls">
-                <div class="group">
-                    <span>Class</span>
-                    <select id="class-select">
-                        <option value="geography">Geography (11B1)</option>
-                        <option value="english">English (11B1)</option>
-                        <option value="maths">Maths (11B1)</option>
-                        <option value="science">Science (11B1)</option>
-                    </select>
-                </div>
-
-                <div class="group">
-                    <input type="checkbox" id="teacher-toggle" checked> 
-                    <label for="teacher-toggle">Include Teachers</label>
-                </div>
-
-                <button id="reset-btn">Reset Board</button>
-            </div>
-        </header>
-
-        <main id="game-board"></main>
+    <h1>LAB Guess Who</h1>
+    
+    <div class="controls">
+        Class: <select id="class-select"></select>
+        <input type="checkbox" id="teacher-toggle" checked> Include Teachers
+        <button id="reset-btn">Reset</button>
     </div>
+
+    <hr>
+
+    <div id="game-board"></div>
 
     <script src="script.js"></script>
 </body>
