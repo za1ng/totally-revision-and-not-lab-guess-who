@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Year 11 Retro Directory</title>
+    <title>LAB Guess Who</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>Year 11 Guess Who</h1>
+        <h1>LAB Guess Who</h1>
         <div class="controls">
             <select id="class-select" onchange="initGame()">
                 <option value="geography">Geography (11B1)</option>
@@ -16,12 +16,7 @@
                 <option value="maths">Maths (11B1)</option>
                 <option value="science">Science (11B1)</option>
             </select>
-            <label>
-                <input type="checkbox" id="teacher-toggle" onchange="initGame()" checked> Include Staff
-            </label>
-            <button id="lock-btn" onclick="lockSelection()">Lock Selection</button>
-            <button id="reset-btn" onclick="resetBoard()">Reset Game</button>
-            <div id="lock-status">STATUS: SELECTING...</div>
+            <button onclick="initGame()">Reset Board</button>
         </div>
     </header>
 
