@@ -74,13 +74,7 @@ const allData = {
     ]
 };
 
-let myCharacterChosen = false;
-
 function initGame() {
-    // If a character is already chosen, we don't want to refresh the board 
-    // unless the player hits the Reset button.
-    if (myCharacterChosen) return;
-
     const classKey = document.getElementById('class-select').value;
     const board = document.getElementById('game-board');
     board.innerHTML = ''; 
@@ -92,52 +86,21 @@ function initGame() {
         card.className = 'card';
         if (person.role === 'teacher') card.classList.add('teacher-card');
 
-        // Added the icon-box div as a placeholder for the future image
         card.innerHTML = `
             <div class="icon-box">?</div>
             <p>${person.name}</p>
         `;
 
         card.onclick = function() {
-            if (!myCharacterChosen) {
-                // PHASE 1: User selects their own character
-                selectMyCharacter(this);
-            } else {
-                // PHASE 2: User flips cards to eliminate people based on guesses
-                // Prevent the user from flipping their own locked card
-                if (!this.classList.contains('my-choice')) {
-                    this.classList.toggle('flipped');
-                }
-            }
+            this.classList.toggle('flipped');
         };
         board.appendChild(card);
     });
 }
 
-function selectMyCharacter(element) {
-    myCharacterChosen = true;
-    element.classList.add('my-choice');
-    
-    // Disable selection menus so choices can't be changed mid-game
-    document.getElementById('class-select').disabled = true;
-    
-    // Update the status message
-    document.getElementById('status-bar').innerText = "CHARACTER LOCKED. FLIP OTHER CARDS TO GUESS.";
-    document.getElementById('status-bar').style.color = "#ffc107";
-}
-
 function resetBoard() {
-    // Reset all game states
-    myCharacterChosen = false;
-    document.getElementById('class-select').disabled = false;
-    
-    // Reset status message
-    document.getElementById('status-bar').innerText = "CHOOSE YOUR CHARACTER TO START";
-    document.getElementById('status-bar').style.color = "white";
-    
-    // Rebuild the board for the current class
     initGame();
 }
 
-// Initial call to load the first class when the page opens
+// Start the page
 initGame();
