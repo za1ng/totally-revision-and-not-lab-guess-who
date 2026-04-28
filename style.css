@@ -37,7 +37,7 @@ hr {
 }
 
 .card.flipped {
-    color: lightgray;
-    border-color: lightgray;
+    color: #ccc;
+    border-color: #ccc;
     text-decoration: line-through;
 }
