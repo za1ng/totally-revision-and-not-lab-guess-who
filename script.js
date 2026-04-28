@@ -1,5 +1,5 @@
 const allData = {
-    geography: [
+    "Geography (11B1)": [
         { name: "Mr Kirkham", role: "teacher" }, { name: "Mr Hance", role: "teacher" },
         { name: "Tunmininu A.", role: "student" }, { name: "Lucas B.", role: "student" },
         { name: "Isaac B.", role: "student" }, { name: "Kitty B.", role: "student" },
@@ -18,7 +18,7 @@ const allData = {
         { name: "Ivy S.", role: "student" }, { name: "Mia S.", role: "student" },
         { name: "Zain G.", role: "student" }
     ],
-    english: [
+    "English (11B1)": [
         { name: "Ms Hyland", role: "teacher" },
         { name: "Violet A.", role: "student" }, { name: "Denis A.", role: "student" },
         { name: "Tunmininu A.", role: "student" }, { name: "Nicole B.", role: "student" },
@@ -35,7 +35,7 @@ const allData = {
         { name: "Uriella-Grace P.", role: "student" }, { name: "Vittoria R.", role: "student" },
         { name: "Sam R.", role: "student" }, { name: "Zain G.", role: "student" }
     ],
-    maths: [
+    "Maths (11B1)": [
         { name: "Eugene Natufe", role: "teacher" }, { name: "Mr Olufodun", role: "teacher" },
         { name: "Denis A.", role: "student" }, { name: "Isaac B.", role: "student" },
         { name: "Eoin B.", role: "student" }, { name: "Max C.", role: "student" },
@@ -53,7 +53,7 @@ const allData = {
         { name: "Mia S.", role: "student" }, { name: "Arlo T.", role: "student" },
         { name: "Linghao Z.", role: "student" }, { name: "Zain G.", role: "student" }
     ],
-    science: [
+    "Science (11B1)": [
         { name: "Mr Smith", role: "teacher" }, { name: "Mr Cole", role: "teacher" }, { name: "Ms Raj", role: "teacher" },
         { name: "Isaac B.", role: "student" }, { name: "Eoin B.", role: "student" },
         { name: "Calin C.", role: "student" }, { name: "Hiyab D.", role: "student" },
@@ -74,36 +74,39 @@ const allData = {
     ]
 };
 
-function initGame() {
-    const classKey = document.getElementById('class-select').value;
-    const includeTeachers = document.getElementById('teacher-toggle').checked;
-    const board = document.getElementById('game-board');
-    
-    board.innerHTML = ''; 
+const classSelect = document.getElementById('class-select');
+const teacherToggle = document.getElementById('teacher-toggle');
+const resetBtn = document.getElementById('reset-btn');
+const board = document.getElementById('game-board');
 
-    let listToDisplay = allData[classKey] || [];
+// Populate class list
+Object.keys(allData).forEach(cls => {
+    const opt = document.createElement('option');
+    opt.value = cls;
+    opt.textContent = cls;
+    classSelect.appendChild(opt);
+});
 
-    if (!includeTeachers) {
-        listToDisplay = listToDisplay.filter(p => p.role !== 'teacher');
-    }
+function drawBoard() {
+    board.innerHTML = '';
+    const selected = classSelect.value;
+    const teachersOn = teacherToggle.checked;
 
-    listToDisplay.forEach(person => {
+    allData[selected].forEach(person => {
+        if (!teachersOn && person.role === 'teacher') return;
+
         const card = document.createElement('div');
         card.className = 'card';
         if (person.role === 'teacher') card.classList.add('teacher-card');
-        card.innerText = person.name;
-        
-        card.onclick = function() {
-            this.classList.toggle('flipped');
-        };
+        card.textContent = person.name;
+
+        card.onclick = () => card.classList.toggle('flipped');
         board.appendChild(card);
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('class-select').addEventListener('change', initGame);
-    document.getElementById('teacher-toggle').addEventListener('change', initGame);
-    document.getElementById('reset-btn').addEventListener('click', initGame);
-    
-    initGame();
-});
+classSelect.onchange = drawBoard;
+teacherToggle.onchange = drawBoard;
+resetBtn.onclick = drawBoard;
+
+drawBoard();
