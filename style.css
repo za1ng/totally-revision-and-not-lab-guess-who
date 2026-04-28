@@ -1,145 +1,140 @@
 :root {
-    --bg-color: #f4f7f6;
-    --card-bg: #ffffff;
-    --primary: #3b82f6;
-    --boss-color: #ef4444;
-    --text-main: #1e293b;
+    --bg: #f8fafc;
+    --header-bg: #ffffff;
+    --primary: #2563eb;
+    --boss-accent: #dc2626;
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    --card-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-main);
+    font-family: 'Inter', -apple-system, sans-serif;
+    background-color: var(--bg);
+    color: var(--text-dark);
     margin: 0;
-    padding: 20px;
+    padding: 0;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
 }
 
 header {
-    max-width: 1000px;
-    margin: 0 auto 30px;
-    text-align: center;
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    background: var(--header-bg);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 40px;
 }
 
-h1 span { color: var(--primary); }
+.brand h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 800;
+}
 
-.controls {
+.brand h1 span { color: var(--primary); }
+
+.brand p {
+    color: var(--text-light);
+    margin: 5px 0 25px 0;
+}
+
+.toolbar {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     gap: 30px;
     flex-wrap: wrap;
-    margin-top: 20px;
 }
 
-.filter-group {
+.control-item {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.control-item label {
+    font-size: 0.8rem;
     font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
 }
 
 select {
-    padding: 8px 12px;
+    padding: 10px 16px;
+    border: 1px solid #e2e8f0;
     border-radius: 8px;
-    border: 1px solid #ddd;
-    background: white;
-}
-
-/* Toggle Switch Styling */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 40px;
-    height: 22px;
-}
-
-.switch input { opacity: 0; width: 0; height: 0; }
-
-.slider {
-    position: absolute;
+    font-size: 1rem;
+    background: #fff;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
 }
 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 14px; width: 14px;
-    left: 4px; bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider { background-color: var(--boss-color); }
-input:checked + .slider:before { transform: translateX(18px); }
-
-.reset-btn {
-    background-color: var(--primary);
+.btn-primary {
+    background: var(--primary);
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 8px;
-    font-weight: bold;
+    font-weight: 600;
     cursor: pointer;
-    transition: transform 0.1s;
+    transition: opacity 0.2s;
 }
 
-.reset-btn:active { transform: scale(0.95); }
+.btn-primary:hover { opacity: 0.9; }
 
-/* Grid and Cards */
+/* Boss Toggle Customization */
+.toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Grid & Cards */
 #game-board {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    max-width: 1200px;
-    margin: 0 auto;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
 }
 
 .card {
-    background: var(--card-bg);
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background: white;
+    padding: 30px 20px;
     border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    transition: all 0.2s ease;
-    border: 2px solid transparent;
     text-align: center;
-    padding: 10px;
+    font-weight: 600;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent;
 }
 
-.card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
 
 .card.boss {
-    border: 2px solid var(--boss-color);
-    color: var(--boss-color);
+    border-color: #fee2e2;
+    background: #fffafa;
 }
 
-.card.boss::after {
-    content: "BOSS";
+.card.boss::before {
+    content: "BOSS CARD";
+    display: block;
     font-size: 0.6rem;
-    background: var(--boss-color);
-    color: white;
-    padding: 2px 6px;
-    border-radius: 4px;
-    margin-top: 5px;
+    color: var(--boss-accent);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
 }
 
 .card.flipped {
-    background-color: #e2e8f0;
-    color: #94a3b8;
+    background: #f1f5f9;
+    color: #cbd5e1;
     box-shadow: none;
     text-decoration: line-through;
     opacity: 0.6;
