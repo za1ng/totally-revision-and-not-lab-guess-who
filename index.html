@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="navbar">
+        <div class="logo">Year 11</div>
+        <div class="nav-icons">
+            <span>🏠</span> <span>🔍</span> <span>🎬</span> <span>🛍️</span>
+        </div>
+        <div class="user-icon">👤</div>
+    </div>
+
     <header>
-        <h1>Student Directory</h1>
+        <h1>Best <span>retro</span> directory</h1>
         <div class="controls">
             <select id="class-select" onchange="initGame()">
                 <option value="geography">Geography (11B1)</option>
@@ -16,13 +24,9 @@
                 <option value="maths">Maths (11B1)</option>
                 <option value="science">Science (11B1)</option>
             </select>
-            <label>
-                <input type="checkbox" id="teacher-toggle" onchange="initGame()" checked> Include Staff
-            </label>
-            <button id="lock-btn" onclick="lockSelection()">Lock Selection</button>
-            <button id="reset-btn" onclick="resetBoard()">Reset</button>
-            <div id="lock-status">READY</div>
+            <button class="pill-btn reset" onclick="resetBoard()">Reset Game</button>
         </div>
+        <div id="status-bar">CHOOSE YOUR CHARACTER TO START</div>
     </header>
 
     <main id="game-board"></main>
