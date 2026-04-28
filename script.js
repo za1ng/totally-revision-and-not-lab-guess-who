@@ -77,6 +77,7 @@ const allData = {
 let isLocked = false;
 
 function initGame() {
+    // If locked, we don't clear and rebuild the board
     if (isLocked) return;
 
     const classKey = document.getElementById('class-select').value;
@@ -84,7 +85,7 @@ function initGame() {
     const board = document.getElementById('game-board');
     
     board.innerHTML = ''; 
-    let listToDisplay = allData[classKey];
+    let listToDisplay = allData[classKey] || [];
     
     if (!includeTeachers) {
         listToDisplay = listToDisplay.filter(p => p.role === 'student');
@@ -95,8 +96,14 @@ function initGame() {
         card.className = 'card';
         if (person.role === 'teacher') card.classList.add('teacher-card');
         card.innerText = person.name;
+        
         card.onclick = function() {
-            this.classList.toggle('flipped');
+            // ONLY allow flipping if the game is LOCKED (meaning the game has started)
+            if (isLocked) {
+                this.classList.toggle('flipped');
+            } else {
+                alert("Please click 'Lock Selection' to start the game first!");
+            }
         };
         board.appendChild(card);
     });
@@ -106,14 +113,16 @@ function lockSelection() {
     isLocked = true;
     document.getElementById('class-select').disabled = true;
     document.getElementById('teacher-toggle').disabled = true;
-    document.getElementById('lock-status').innerText = "BOARD LOCKED - START GUESSING";
+    document.getElementById('lock-status').innerText = "LOCKED - GAME IN PROGRESS";
+    document.getElementById('lock-btn').style.opacity = "0.5";
 }
 
 function resetBoard() {
     isLocked = false;
     document.getElementById('class-select').disabled = false;
     document.getElementById('teacher-toggle').disabled = false;
-    document.getElementById('lock-status').innerText = "STATUS: SELECTING...";
+    document.getElementById('lock-status').innerText = "READY";
+    document.getElementById('lock-btn').style.opacity = "1";
     initGame();
 }
 
