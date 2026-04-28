@@ -86,10 +86,7 @@ function initGame() {
         card.className = 'card';
         if (person.role === 'teacher') card.classList.add('teacher-card');
 
-        card.innerHTML = `
-            <div class="icon-box">?</div>
-            <p>${person.name}</p>
-        `;
+        card.innerHTML = `<p>${person.name}</p>`;
 
         card.onclick = function() {
             this.classList.toggle('flipped');
@@ -102,5 +99,4 @@ function resetBoard() {
     initGame();
 }
 
-// Start the page
 initGame();
