@@ -74,57 +74,70 @@ const allData = {
     ]
 };
 
-let isLocked = false;
+let myCharacterChosen = false;
 
 function initGame() {
-    // If locked, we don't clear and rebuild the board
-    if (isLocked) return;
+    // If a character is already chosen, we don't want to refresh the board 
+    // unless the player hits the Reset button.
+    if (myCharacterChosen) return;
 
     const classKey = document.getElementById('class-select').value;
-    const includeTeachers = document.getElementById('teacher-toggle').checked;
     const board = document.getElementById('game-board');
-    
     board.innerHTML = ''; 
-    let listToDisplay = allData[classKey] || [];
-    
-    if (!includeTeachers) {
-        listToDisplay = listToDisplay.filter(p => p.role === 'student');
-    }
+
+    const listToDisplay = allData[classKey] || [];
 
     listToDisplay.forEach(person => {
         const card = document.createElement('div');
         card.className = 'card';
         if (person.role === 'teacher') card.classList.add('teacher-card');
-        card.innerText = person.name;
-        
+
+        // Added the icon-box div as a placeholder for the future image
+        card.innerHTML = `
+            <div class="icon-box">?</div>
+            <p>${person.name}</p>
+        `;
+
         card.onclick = function() {
-            // ONLY allow flipping if the game is LOCKED (meaning the game has started)
-            if (isLocked) {
-                this.classList.toggle('flipped');
+            if (!myCharacterChosen) {
+                // PHASE 1: User selects their own character
+                selectMyCharacter(this);
             } else {
-                alert("Please click 'Lock Selection' to start the game first!");
+                // PHASE 2: User flips cards to eliminate people based on guesses
+                // Prevent the user from flipping their own locked card
+                if (!this.classList.contains('my-choice')) {
+                    this.classList.toggle('flipped');
+                }
             }
         };
         board.appendChild(card);
     });
 }
 
-function lockSelection() {
-    isLocked = true;
+function selectMyCharacter(element) {
+    myCharacterChosen = true;
+    element.classList.add('my-choice');
+    
+    // Disable selection menus so choices can't be changed mid-game
     document.getElementById('class-select').disabled = true;
-    document.getElementById('teacher-toggle').disabled = true;
-    document.getElementById('lock-status').innerText = "LOCKED - GAME IN PROGRESS";
-    document.getElementById('lock-btn').style.opacity = "0.5";
+    
+    // Update the status message
+    document.getElementById('status-bar').innerText = "CHARACTER LOCKED. FLIP OTHER CARDS TO GUESS.";
+    document.getElementById('status-bar').style.color = "#ffc107";
 }
 
 function resetBoard() {
-    isLocked = false;
+    // Reset all game states
+    myCharacterChosen = false;
     document.getElementById('class-select').disabled = false;
-    document.getElementById('teacher-toggle').disabled = false;
-    document.getElementById('lock-status').innerText = "READY";
-    document.getElementById('lock-btn').style.opacity = "1";
+    
+    // Reset status message
+    document.getElementById('status-bar').innerText = "CHOOSE YOUR CHARACTER TO START";
+    document.getElementById('status-bar').style.color = "white";
+    
+    // Rebuild the board for the current class
     initGame();
 }
 
-// Initial Run
+// Initial call to load the first class when the page opens
 initGame();
