@@ -60,7 +60,7 @@ const allData = {
         { name: "Eren B.", role: "student" }, { name: "Isaac B.", role: "student" },
         { name: "Kitty B.", role: "student" }, { name: "Mohamed C.", role: "student" },
         { name: "Hiyab D.", role: "student" }, { name: "Samuel J.", role: "student" },
-        { name: "Rosin K.", role: "student" }, { name: "Can K.", role: "student" },
+        { name: "Rosin K.", role: "student" }, { name: "Andrew K.", role: "student" },
         { name: "Joseph L.", role: "student" }, { name: "Elle M.", role: "student" },
         { name: "Rachel M.", role: "student" }, { name: "Lily M.", role: "student" },
         { name: "Julia O.", role: "student" }, { name: "Olivia O.", role: "student" },
@@ -110,23 +110,23 @@ const allData = {
         { name: "Zain G.", role: "student" }
     ],
     "B Side": [
-        // Teachers from all classes
+        // All Teachers
         { name: "Mr Kirkham", role: "teacher" }, { name: "Mr Hance", role: "teacher" },
         { name: "Ms Hyland", role: "teacher" }, { name: "Ms Young", role: "teacher" },
         { name: "Mr Osmotherly", role: "teacher" }, { name: "Mr Sinclair", role: "teacher" },
         { name: "Eugene Natufe", role: "teacher" }, { name: "Mr Olufodun", role: "teacher" },
         { name: "Mr Smith", role: "teacher" }, { name: "Mr Cole", role: "teacher" },
         { name: "Ms Raj", role: "teacher" },
-        // Unique Students (Merged English B1, B2, B3)
+        // Unique Students
         { name: "Aaron Z.", role: "student" }, { name: "Alexandra D.", role: "student" },
         { name: "Alexander O.", role: "student" }, { name: "Alice S.", role: "student" },
         { name: "Ama-Kumani H.", role: "student" }, { name: "Amelia R.", role: "student" },
-        { name: "Angela L.", role: "student" }, { name: "Anna Maria D.", role: "student" },
-        { name: "Archie R.", role: "student" }, { name: "Arlo T.", role: "student" },
-        { name: "Avina C.", role: "student" }, { name: "Ava S.", role: "student" },
-        { name: "Ayla A.", role: "student" }, { name: "Basit R.", role: "student" },
-        { name: "Calin C.", role: "student" }, { name: "Cameron R.", role: "student" },
-        { name: "Can K.", role: "student" }, { name: "Charles H.", role: "student" },
+        { name: "Andrew K.", role: "student" }, { name: "Angela L.", role: "student" },
+        { name: "Anna Maria D.", role: "student" }, { name: "Archie R.", role: "student" },
+        { name: "Arlo T.", role: "student" }, { name: "Avina C.", role: "student" },
+        { name: "Ava S.", role: "student" }, { name: "Ayla A.", role: "student" },
+        { name: "Basit R.", role: "student" }, { name: "Calin C.", role: "student" },
+        { name: "Cameron R.", role: "student" }, { name: "Charles H.", role: "student" },
         { name: "Daisy Mae R.", role: "student" }, { name: "Darius D.", role: "student" },
         { name: "Denis A.", role: "student" }, { name: "Denis Z.", role: "student" },
         { name: "Ebube O.", role: "student" }, { name: "Eda D.", role: "student" },
@@ -170,7 +170,6 @@ const teacherToggle = document.getElementById('teacher-toggle');
 const resetBtn = document.getElementById('reset-btn');
 const board = document.getElementById('game-board');
 
-// Populate class list
 Object.keys(allData).forEach(cls => {
     const opt = document.createElement('option');
     opt.value = cls;
